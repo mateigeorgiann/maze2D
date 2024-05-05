@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctgyfhtaylcm0"]
+
+[ext_resource type="Script" path="res://scripts/key_red.gd" id="1_wrlq8"]
+[ext_resource type="Texture2D" uid="uid://by0tgp4toq3lb" path="res://keys/key_red.png" id="2_h4otw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3mtet"]
+size = Vector2(9, 16)
+
+[node name="key_red" type="Node2D"]
+script = ExtResource("1_wrlq8")
+
+[node name="KeyRed" type="Sprite2D" parent="."]
+texture = ExtResource("2_h4otw")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="Hitbox_Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_3mtet")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_area_2d_body_entered"]

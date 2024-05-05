@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcyh1ej173jwf"]
+
+[ext_resource type="Texture2D" uid="uid://k8whyvf1idd3" path="res://doors/one_way_door.png" id="1_nw3x6"]
+[ext_resource type="Script" path="res://scripts/one_way_door.gd" id="1_tit85"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ovu0"]
+size = Vector2(16, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrdwh"]
+size = Vector2(16, 19)
+
+[node name="OneWayDoor" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_tit85")
+
+[node name="OneWayDoor" type="Sprite2D" parent="."]
+texture = ExtResource("1_nw3x6")
+
+[node name="DoorHitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="Hitbox_Detect_If_Exited" type="CollisionShape2D" parent="DoorHitbox"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_2ovu0")
+
+[node name="Hitbox_Door" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_yrdwh")
+debug_color = Color(0.870588, 0.270588, 0.564706, 0.419608)
+
+[connection signal="body_entered" from="DoorHitbox" to="." method="_on_door_hitbox_body_entered"]
